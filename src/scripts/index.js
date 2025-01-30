@@ -7,14 +7,13 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     return;
   }
   if (node.right !== null) {
-    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : `   `}`, false);
   }
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
   if (node.left !== null) {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 };
 
 let tree = new BST([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-tree.root = tree.buildTree(tree.root);
 prettyPrint(tree.root);
