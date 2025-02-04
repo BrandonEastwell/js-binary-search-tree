@@ -99,20 +99,49 @@ export default class BST {
     callback(root);
   }
 
-  height(node) {
+  height(node = this.root) {
+    if (node === null) return -1;
+    if (node.left === null && node.right === null) return 0;
 
+    let leftHeight = this.height(node.left);
+    let rightHeight = this.height(node.right);
+
+    return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
   }
 
   depth(node) {
+    helper(this.root, node, 0);
+    function helper(cur = this.root, node, depth) {
+      if (node === null) return -1;
+      if (node.value === cur.value) return depth;
 
+      let left = depth(cur.left, node, depth + 1);
+      if (left !== -1) return left;
+      return helper(cur.right, node, depth + 1)
+    }
   }
 
-  isBalanced() {
+  isBalanced(node = this.root) {
+    function checkHeight(node) {
+      if (node === null) return 0;
 
+      let leftHeight = checkHeight(node.left);
+      let rightHeight = checkHeight(node.right);
+
+      if (leftHeight === -1 || rightHeight === -1) return -1;
+      if ((leftHeight - rightHeight) > 1 || (rightHeight - leftHeight) > 1) return -1;
+      else return 1
+    }
+
+    return !!checkHeight(node);
   }
 
   reBalanced() {
-
+    let sortedArr = [];
+    this.inOrder(this.root, node => {
+      sortedArr.push(node.value);
+    });
+    this.root = this.buildTree(sortedArr);
   }
 
   sort(arr) {

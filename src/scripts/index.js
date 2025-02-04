@@ -15,5 +15,37 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-let tree = new BST([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+const randArrOfNum = (length) => {
+  let arr = [];
+  while (length > 0) {
+    arr.push(Math.round(Math.random() * 100))
+    length--;
+  }
+  return arr;
+}
+
+let tree = new BST(randArrOfNum(Math.random() * 10));
+console.log(tree.isBalanced());
+
+tree.levelOrder();
+tree.preOrder();
+tree.postOrder();
+tree.inOrder();
+
+tree.insert(tree.root, Math.round(Math.random() * 1000));
+tree.insert(tree.root, Math.round(Math.random() * 1000));
+tree.insert(tree.root, Math.round(Math.random() * 1000));
+tree.insert(tree.root, Math.round(Math.random() * 1000));
+tree.insert(tree.root, Math.round(Math.random() * 1000));
+tree.insert(tree.root, Math.round(Math.random() * 1000));
+
+console.log(tree.isBalanced());
+tree.reBalanced();
+console.log(tree.isBalanced());
+
+tree.levelOrder();
+tree.preOrder();
+tree.postOrder();
+tree.inOrder();
+
 prettyPrint(tree.root);
